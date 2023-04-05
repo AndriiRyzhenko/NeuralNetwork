@@ -3,6 +3,7 @@ using Lab_3.Models;
 using System.Globalization;
 using System.Text;
 
+namespace Lab_3;
 class Program
 {
     private const double K = 1;

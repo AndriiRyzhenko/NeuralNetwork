@@ -1,19 +1,19 @@
-﻿namespace Lab_3.Models
+﻿namespace Lab_3.Models;
+
+public class Result
 {
-    public class Result
+    public double TrainEpsilonSquareSum { get; set; }
+    public double TestEpsilonSquareSum { get; set; }
+
+    public List<string> ToCsv(int era)
     {
-        public double TrainEpsilonSquareSum { get; set; }
-        public double TestEpsilonSquareSum { get; set; }
+        double trainEpsilonSquareSum = TrainEpsilonSquareSum / 2;
+        double trainEAverage = trainEpsilonSquareSum / 1000;
+        double testEpsilonSquareSum = TestEpsilonSquareSum / 2;
+        double testEpsilonAverage = testEpsilonSquareSum / 4;
 
-        public List<string> ToCsv(int era)
-        {
-            double trainEpsilonSquareSum = TrainEpsilonSquareSum / 2;
-            double trainEAverage = trainEpsilonSquareSum / 1000;
-            double testEpsilonSquareSum = TestEpsilonSquareSum / 2;
-            double testEpsilonAverage = testEpsilonSquareSum / 4;
-
-            return new List<string> { era.ToString(), trainEpsilonSquareSum.ToString(), trainEAverage.ToString(),
+        return new List<string> { era.ToString(), trainEpsilonSquareSum.ToString(), trainEAverage.ToString(),
                 testEpsilonSquareSum.ToString(), testEpsilonAverage.ToString() };
-        }
     }
 }
+
