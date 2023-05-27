@@ -68,23 +68,23 @@ class Program
 
         while (t < tMax - 0.5 * dt)
         {
-            double phi_ = 200 * (phi - phiMin) / (phiMax - phiMin) - 100;
-            double omega_ = 200 * (omega - omegaMin) / (omegaMax - omegaMin) - 100;
+            double phiCalc = 200 * (phi - phiMin) / (phiMax - phiMin) - 100;
+            double omegaCalc = 200 * (omega - omegaMin) / (omegaMax - omegaMin) - 100;
 
-            double mu_ = -100;
+            double muCalc = -100;
             double s1 = 0;
             double s2 = 0;
 
-            while (mu_ < 100 - 0.5 * dmu)
+            while (muCalc < 100 - 0.5 * dmu)
             {
                 double xiDash = 0;
 
                 for (int i = 0; i < baseRules.GetLength(0); i++)
                 {
-                    double alfa = CalculateMembership(baseRules[i, 0], phi_);
-                    double beta = CalculateMembership(baseRules[i, 1], omega_);
+                    double alfa = CalculateMembership(baseRules[i, 0], phiCalc);
+                    double beta = CalculateMembership(baseRules[i, 1], omegaCalc);
                     double gama = Math.Min(alfa, beta);
-                    double delta = CalculateMembership(baseRules[i, 2], mu_);
+                    double delta = CalculateMembership(baseRules[i, 2], muCalc);
                     double xi = Math.Min(gama, delta);
                     if (xiDash < xi)
                     {
@@ -92,9 +92,9 @@ class Program
                     }
                 }
 
-                s1 = s1 + mu_ * xiDash * dmu;
+                s1 = s1 + muCalc * xiDash * dmu;
                 s2 = s2 + xiDash * dmu;
-                mu_ = mu_ + dmu;
+                muCalc = muCalc + dmu;
             }
 
             double mu_dash = s1 / s2;
